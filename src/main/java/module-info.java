@@ -1,8 +1,8 @@
-module com.example.oups {
+module com.example.ConduiteProjet {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.oups to javafx.fxml;
-    exports com.example.oups;
+    opens com.example.ConduiteProjet to javafx.fxml;
+    exports com.example.ConduiteProjet;
 }

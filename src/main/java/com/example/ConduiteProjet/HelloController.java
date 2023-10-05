@@ -1,4 +1,4 @@
-package com.example.oups;
+package com.example.ConduiteProjet;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
