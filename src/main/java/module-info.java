@@ -1,8 +1,8 @@
-module com.example.ConduiteProjet {
+module com.example.conduiteprojet {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.ConduiteProjet to javafx.fxml;
-    exports com.example.ConduiteProjet;
+    opens com.example.conduiteprojet to javafx.fxml;
+    exports com.example.conduiteprojet;
 }
