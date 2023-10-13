@@ -10,7 +10,12 @@ public class ChooseRoleController {
 
     @FXML
     public void onValidateButtonClick(){
-        String role = roleBox.getValue();
-        System.out.println(role);
+        if (roleBox.getValue() != null) {
+            String role = roleBox.getValue();
+            System.out.println(role);
+        } else {
+            System.out.println("Choisir une valeur.");
+            //go to new page
+        }
     }
 }
