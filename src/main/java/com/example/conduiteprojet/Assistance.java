@@ -8,6 +8,7 @@ import java.sql.Date;
 public class Assistance {
     private int id;
     private User creator;
+    private String title;
     private String description;
     private Date createdAt;
     private Date dueDate;
@@ -71,5 +72,13 @@ public class Assistance {
 
     public boolean isCancelled() {
         return isCancelled;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

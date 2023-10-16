@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class CreateAssistanceController{
@@ -29,10 +30,27 @@ public class CreateAssistanceController{
 
     public void onCreateButtonClick(ActionEvent actionEvent) {
         System.out.println("createButtonClicked");
+        AssistanceDaoImplementation assistanceDaoImpl = new AssistanceDaoImplementation();
+
         try {
-            con = Database.getDBConnection();
+            String title = titleField.getText();
+            Assistance ass = new Assistance();
+            ass.setTitle(title);
+            assistanceDaoImpl.add(ass);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+
+        try {
+            List<Assistance> listAssistances = assistanceDaoImpl.getAssistances();
+            for(Assistance ass: listAssistances) {
+                System.out.println(ass.getId() + " " + ass.getTitle());
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException getAllAssistances." + e);
+        }
+
+
+
     }
 }
