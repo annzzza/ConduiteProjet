@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Database {
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_CON = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306";
+    private static final String DB_CON = "jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_018";
     private static final String DB_USER = "projet_gei_018";
     private static final String DB_PASSWORD = "aoJai9go";
 
