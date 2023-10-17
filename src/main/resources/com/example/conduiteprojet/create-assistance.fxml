@@ -6,10 +6,9 @@
 <?import javafx.scene.text.Font?>
 
 <GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+          hgap="10" vgap="10"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.CreateAssistanceController">
-    <padding>
-        <Insets top="40" right="40" bottom="40" left="40"/>
-    </padding>
+
     <columnConstraints>
         <ColumnConstraints minWidth="10.0" prefWidth="100.0" halignment="RIGHT"/>
         <ColumnConstraints minWidth="10.0" prefWidth="200.0" hgrow="ALWAYS"/>
@@ -34,13 +33,20 @@
     <!-- Add Description Text Field -->
     <TextField fx:id="descriptionField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
-
+    <!-- Add Due date Label -->
+    <Label text="Due date: " GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <!-- Add Due date picker -->
+    <DatePicker fx:id="dueDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
     <!-- Add Cancel and Submit Button -->
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0"
-          GridPane.columnIndex="1" GridPane.rowIndex="3">
+          GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClick"
                 text="Cancel" textAlignment="CENTER"/>
         <Button fx:id="createButton" text="Create" onAction="#onCreateButtonClick"/>
     </HBox>
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
 </GridPane>

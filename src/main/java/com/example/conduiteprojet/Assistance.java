@@ -6,15 +6,16 @@ import java.sql.Date;
  *
  */
 public class Assistance {
+    public enum Status {
+        OPEN, CLOSE
+    }
     private int id;
-    private User creator;
+    private int creatorId;
     private String title;
     private String description;
     private Date createdAt;
     private Date dueDate;
-
-    private String status;
-
+    private Status status;
     private boolean isCancelled;
 
     public void setId(int id) {
@@ -25,12 +26,12 @@ public class Assistance {
         return id;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setCreatorId(int creatorId) {
+        this.creatorId = creatorId;
     }
 
-    public User getCreator() {
-        return creator;
+    public int getCreatorId() {
+        return creatorId;
     }
 
     public void setDescription(String description) {
@@ -57,11 +58,11 @@ public class Assistance {
         return dueDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

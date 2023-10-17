@@ -10,7 +10,7 @@ import java.util.List;
 public class AssistanceDaoImplementation
     implements AssistanceDAO {
 
-    static String table="assistance";
+    static final String table="assistance";
 
     static Connection con = Database.getDBConnection();
 
@@ -20,9 +20,17 @@ public class AssistanceDaoImplementation
      */
     @Override
     public void add(Assistance assistance) throws SQLException {
-        String query = "INSERT INTO " + table + "(title) VALUES ( ?)";
+        String query = "INSERT INTO " + table +
+                "(title, creator, description, createdAt, dueDate, status, isCancelled) "
+                +"VALUES ( ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, assistance.getTitle());
+        ps.setInt(2, assistance.getCreatorId());
+        ps.setString(3, assistance.getDescription());
+        ps.setDate(4, assistance.getCreatedAt());
+        ps.setDate(5, assistance.getDueDate());
+        ps.setString(6, assistance.getStatus().toString());
+        ps.setBoolean(7, assistance.isCancelled());
         int n = ps.executeUpdate();
     }
 
@@ -56,6 +64,12 @@ public class AssistanceDaoImplementation
             check = true;
             ass.setId(rs.getInt("id"));
             ass.setTitle(rs.getString("title"));
+            ass.setCreatorId(rs.getInt("creator"));
+            ass.setDescription(rs.getString("description"));
+            ass.setStatus(Assistance.Status.valueOf(rs.getString("status").toUpperCase()));
+            ass.setCancelled(rs.getBoolean("isCancelled"));
+            ass.setDueDate(rs.getDate("dueDate"));
+            ass.setCreatedAt(rs.getDate("createdAt"));
         }
 
         if (check) {
@@ -81,6 +95,12 @@ public class AssistanceDaoImplementation
             Assistance ass = new Assistance();
             ass.setId(rs.getInt("id"));
             ass.setTitle(rs.getString("title"));
+            ass.setCreatorId(rs.getInt("creator"));
+            ass.setDescription(rs.getString("description"));
+            ass.setStatus(Assistance.Status.valueOf(rs.getString("status").toUpperCase()));
+            ass.setCancelled(rs.getBoolean("isCancelled"));
+            ass.setDueDate(rs.getDate("dueDate"));
+            ass.setCreatedAt(rs.getDate("createdAt"));
             assistances.add(ass);
         }
 
@@ -93,12 +113,19 @@ public class AssistanceDaoImplementation
      */
     @Override
     public void update(Assistance assistance) throws SQLException {
+//      "(title, creator, description, createdAt, dueDate, status, isCancelled) "
         String query = "UPDATE " + table + "SET"
-                + "title=?,"
+                + "title=?, creator=?, description=?, createdAt=?, dueDate=?, status=?, isCancelled=?"
                 + "WHERE id=?";
         PreparedStatement ps = con.prepareStatement(query);
+
         ps.setString(1, assistance.getTitle());
-        ps.setInt(2,assistance.getId());
+        ps.setInt(2, assistance.getCreatorId());
+        ps.setString(3, assistance.getDescription());
+        ps.setDate(4, assistance.getCreatedAt());
+        ps.setDate(5, assistance.getDueDate());
+        ps.setString(6, assistance.getStatus().toString());
+        ps.setBoolean(7, assistance.isCancelled());
         ps.executeUpdate();
     }
 }

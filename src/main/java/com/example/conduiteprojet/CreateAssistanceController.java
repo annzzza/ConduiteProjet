@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.print.Printer;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -18,6 +21,7 @@ public class CreateAssistanceController{
     public TextField titleField;
     public TextField descriptionField;
     public Button createButton;
+    public DatePicker dueDatePicker;
     @FXML
     private Button cancelButton;
 
@@ -36,6 +40,13 @@ public class CreateAssistanceController{
             String title = titleField.getText();
             Assistance ass = new Assistance();
             ass.setTitle(title);
+            ass.setCreatorId(1);
+            ass.setDescription(descriptionField.getText());
+            ass.setStatus(Assistance.Status.OPEN);
+            ass.setCancelled(false);
+            java.util.Date date = java.util.Date.from(dueDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            ass.setDueDate(new java.sql.Date(date.getTime()));
+            ass.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
             assistanceDaoImpl.add(ass);
         } catch (SQLException e) {
             e.printStackTrace();
