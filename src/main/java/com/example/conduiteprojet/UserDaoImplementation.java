@@ -14,13 +14,15 @@ public class UserDaoImplementation implements UserDAO {
     @Override
     public void add(User user) throws SQLException {
 
-        String query = "INSERT INTO " + table + "(firstname, lastname, username, role) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO " + table + "(firstname, lastname, username, password, role) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, user.getFirstName());
         ps.setString(2, user.getLastName());
         ps.setString(3, user.getUsername());
-        ps.setString(4, user.getRole());
+        ps.setString(4, user.getPassword());
+        ps.setString(5, user.getRole());
         int i = ps.executeUpdate();
+
      }
 
     /**
@@ -53,6 +55,7 @@ public class UserDaoImplementation implements UserDAO {
             user.setFirstName(res.getString("firstname"));
             user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
+            user.setPassword(res.getString("password"));
             user.setRole(res.getString("role"));
         }
         if (check){
@@ -79,6 +82,7 @@ public class UserDaoImplementation implements UserDAO {
             user.setFirstName(res.getString("firstname"));
             user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
+            user.setPassword(res.getString("password"));
             user.setRole(res.getString("role"));
             ls.add(user);
         }
@@ -91,13 +95,14 @@ public class UserDaoImplementation implements UserDAO {
      */
     @Override
     public void update(User user) throws SQLException {
-        String query = "UPDATE " + table + " SET firstname = ?, lastname = ?, username = ?, role = ? WHERE id_user = ?";
+        String query = "UPDATE " + table + " SET firstname = ?, lastname = ?, username = ?, password=?, role = ? WHERE id_user = ?";
 
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, user.getFirstName());
         ps.setString(2, user.getLastName());
         ps.setString(3, user.getUsername());
-        ps.setString(4, user.getRole());
+        ps.setString(4, user.getPassword());
+        ps.setString(5, user.getRole());
         ps.executeUpdate();
     }
 }

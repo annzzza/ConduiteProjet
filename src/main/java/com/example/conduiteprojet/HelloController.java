@@ -13,6 +13,10 @@ public class HelloController {
 
     @FXML
     Button HelloButton = new Button();
+
+    /**
+     * Opens the connexion/registration page and closes the Welcome page
+     */
     @FXML
     protected void onHelloButtonClick(){
             try {
@@ -21,15 +25,11 @@ public class HelloController {
                 stage.setTitle("Choose a Role");
                 stage.setScene(new Scene(fxmlLoader.load()));
                 stage.show();
-                // Hide this current window (if this is what you want)
-                //((Node)(event.getSource())).getScene().getWindow().hide();
+                Stage oldStage = (Stage) HelloButton.getScene().getWindow();
+                oldStage.close();
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-
 }
-
-
