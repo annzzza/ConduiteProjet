@@ -10,7 +10,7 @@
 
 
 <?import javafx.scene.text.Font?>
-<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" hgap="10" vgap="10"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.ChooseRoleController">
     <padding>
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0"/>
@@ -42,16 +42,18 @@
     <TextField fx:id="textFieldUsername" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     <PasswordField fx:id="textFieldPassword" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-    <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+    <Label text="Role:" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
     <ChoiceBox fx:id="roleBox" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.halignment="CENTER">
         <String fx:value="Patient"/>
         <String fx:value="Benevole"/>
     </ChoiceBox>
 
 
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0"
+    <HBox fx:id = "root" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0"
           GridPane.columnIndex="1" GridPane.rowIndex="7">
         <Button fx:id="validateButton" text="Validate" onAction="#onValidateButtonClick"/>
+        <Label fx:id="welcomeLabel" text="" />
+        <Button fx:id="pursueButton" text="Pursue" onAction="#onPursueButtonClick" visible="false"/>
     </HBox>
 
 </GridPane>

@@ -2,15 +2,16 @@ package com.example.conduiteprojet;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class ChooseRoleController {
+    @FXML
+    private HBox root = new HBox();
 
     @FXML
     private ChoiceBox<String> roleBox = new ChoiceBox<String>();
@@ -22,6 +23,13 @@ public class ChooseRoleController {
     private TextField textFieldLastname = new TextField();
     @FXML
     private TextField textFieldFirstname = new TextField();
+
+    @FXML
+    private Button validateButton = new Button();
+    @FXML
+    private Label welcomeLabel = new Label();
+    @FXML
+    private Button pursueButton = new Button();
 
     /**
      * @param input String : password entered by user
@@ -55,6 +63,11 @@ public class ChooseRoleController {
         }
     }
 
+    @FXML
+    public void onPursueButtonClick(){
+
+    }
+
     /**
      * Sends new User to database with first name, last name, username, password and role.
      * A Role must be picked.
@@ -80,6 +93,13 @@ public class ChooseRoleController {
             UserDaoImplementation userDaoImplementation = new UserDaoImplementation();
             try {
                 userDaoImplementation.add(newUser);
+                root.getChildren().remove(validateButton);
+                textFieldFirstname.setEditable(false);
+                textFieldLastname.setEditable(false);
+                textFieldUsername.setEditable(false);
+                textFieldPassword.setEditable(false);
+                welcomeLabel.setText("Welcome " + chosenFirstname + "!");
+                pursueButton.setVisible(true);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
