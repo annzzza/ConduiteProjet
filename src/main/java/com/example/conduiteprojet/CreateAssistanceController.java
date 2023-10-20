@@ -40,7 +40,7 @@ public class CreateAssistanceController{
             String title = titleField.getText();
             Assistance ass = new Assistance();
             ass.setTitle(title);
-            ass.setCreatorId(1);
+            ass.setCreatorId(1); // @TODO change to current user when connexion will be set up
             ass.setDescription(descriptionField.getText());
             ass.setStatus(Assistance.Status.OPEN);
             ass.setCancelled(false);
