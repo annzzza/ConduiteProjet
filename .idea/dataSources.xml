@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="projet_gei_018@srv-bdens.insa-toulouse.fr" uuid="c431abe2-2a46-45fa-a87f-76fabb49392a">
+    <data-source source="LOCAL" name="projet_gei_018@srv-bdens.insa-toulouse.fr" uuid="c29dfda4-3db0-4497-bb23-6bc123cd6cae">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_018</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="projet_gei_001@srv-bdens.insa-toulouse.fr" uuid="2d7ebb50-51bc-4cca-8348-cbd2192b95cb">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/projet_gei_001</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

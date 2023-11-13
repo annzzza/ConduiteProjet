@@ -24,8 +24,8 @@ public class Database {
             con = DriverManager.getConnection(DB_CON, DB_USER, DB_PASSWORD);
             return con;
         } catch (SQLException e) {
-            System.out.println("ca va pas");
-            //throw new SQLException(e);
+            System.out.println("SQLException, Class Database, getDBConnection()" + e);
+//            throw new SQLException(e);
         }
         return con;
     }

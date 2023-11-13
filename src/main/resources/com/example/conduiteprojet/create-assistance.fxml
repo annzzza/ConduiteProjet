@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+          hgap="10" vgap="10"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.CreateAssistanceController">
+
+    <columnConstraints>
+        <ColumnConstraints minWidth="10.0" prefWidth="100.0" halignment="RIGHT"/>
+        <ColumnConstraints minWidth="10.0" prefWidth="200.0" hgrow="ALWAYS"/>
+    </columnConstraints>
+    <!-- Add Header Label -->
+    <Label text="Create Assistance Form" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.rowSpan="1" GridPane.halignment="CENTER">
+        <font>
+            <Font name="Arial" size="24"/>
+        </font>
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"/>
+        </GridPane.margin>
+    </Label>
+
+    <!-- Add Title Label -->
+    <Label text="Title: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <!-- Add Title Text Field -->
+    <TextField fx:id="titleField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <!-- Add Description Label -->
+    <Label text="Description: " GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <!-- Add Description Text Field -->
+    <TextField fx:id="descriptionField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <!-- Add Due date Label -->
+    <Label text="Due date: " GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <!-- Add Due date picker -->
+    <DatePicker fx:id="dueDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <!-- Add Cancel and Submit Button -->
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0"
+          GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onCancelButtonClick"
+                text="Cancel" textAlignment="CENTER"/>
+        <Button fx:id="createButton" text="Create" onAction="#onCreateButtonClick"/>
+    </HBox>
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+</GridPane>
