@@ -70,7 +70,7 @@ public class ChooseRoleController {
 
     /**
      * Sends new User to database with first name, last name, username, password and role.
-     * A Role must be picked.
+     * A Role MUST be picked.
      */
     @FXML
     public void onValidateButtonClick() {
