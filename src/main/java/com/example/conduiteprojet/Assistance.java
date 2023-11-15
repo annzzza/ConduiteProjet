@@ -1,13 +1,22 @@
 package com.example.conduiteprojet;
 
-import java.sql.Date;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 public class Assistance {
+    public Assistance() {
+    }
+
     public enum Status {
         OPEN, CLOSE
+    }
+
+    public enum Type {
+        REQUEST, OFFER
     }
     private int id;
     private int creatorId;
@@ -16,7 +25,11 @@ public class Assistance {
     private Date createdAt;
     private Date dueDate;
     private Status status;
+    private Type type;
     private boolean isCancelled;
+
+    static Connection con = Database.getDBConnection();
+
 
     public void setId(int id) {
         this.id = id;
@@ -66,6 +79,14 @@ public class Assistance {
         this.status = status;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public void setCancelled(boolean cancelled) {
         isCancelled = cancelled;
     }
@@ -81,5 +102,14 @@ public class Assistance {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCreatorName() throws SQLException {
+        String query = "SELECT firstname FROM user WHERE id_user = ?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, this.getCreatorId());
+        ResultSet rs = ps.executeQuery();
+
+        return rs.getString("firstname");
     }
 }

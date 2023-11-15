@@ -15,6 +15,16 @@ public interface AssistanceDAO {
         throws SQLException;
     public List<Assistance> getAssistances()
         throws SQLException;
+
+
+    public List<Assistance> getAssistanceOffers()
+            throws SQLException;
+
+    public List<Assistance> getAssistanceRequests()
+            throws SQLException;
+
+
+
     public void update(Assistance assistance)
         throws SQLException;
 }

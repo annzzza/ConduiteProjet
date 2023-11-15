@@ -8,6 +8,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.prefs.Preferences;
+
 
 public class ChooseRoleController {
     @FXML
@@ -76,8 +78,6 @@ public class ChooseRoleController {
     public void onValidateButtonClick() {
         if (roleBox.getValue() != null) {
             String chosenRole = roleBox.getValue();
-            System.out.println(chosenRole);
-
             String chosenUsername = textFieldUsername.getText();
             String chosenLastname = textFieldLastname.getText();
             String chosenFirstname = textFieldFirstname.getText();
@@ -104,9 +104,10 @@ public class ChooseRoleController {
                 throw new RuntimeException(e);
             }
 
+            PreferencesManager.saveRole(chosenRole);
 
         } else {
-            System.out.println("Choisir une valeur.");
+            welcomeLabel.setText("Choisir une valeur.");
         }
     }
 }
