@@ -37,12 +37,15 @@ public class CreateAssistanceController{
         AssistanceDaoImplementation assistanceDaoImpl = new AssistanceDaoImplementation();
 
         try {
+            //@TODO validate data
             String title = titleField.getText();
             Assistance ass = new Assistance();
             ass.setTitle(title);
             ass.setCreatorId(1); // @TODO change to current user when connexion will be set up
             ass.setDescription(descriptionField.getText());
             ass.setStatus(Assistance.Status.OPEN);
+
+            ass.setType(Assistance.Type.OFFER);
             ass.setCancelled(false);
             java.util.Date date = java.util.Date.from(dueDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             ass.setDueDate(new java.sql.Date(date.getTime()));

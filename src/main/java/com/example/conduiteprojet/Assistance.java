@@ -6,9 +6,15 @@ import java.sql.Date;
  *
  */
 public class Assistance {
+
     public enum Status {
         OPEN, CLOSE
     }
+
+    public enum Type {
+        REQUEST, OFFER
+    }
+
     private int id;
     private int creatorId;
     private String title;
@@ -16,6 +22,7 @@ public class Assistance {
     private Date createdAt;
     private Date dueDate;
     private Status status;
+    private Type type;
     private boolean isCancelled;
 
     public void setId(int id) {
@@ -65,6 +72,15 @@ public class Assistance {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
 
     public void setCancelled(boolean cancelled) {
         isCancelled = cancelled;
