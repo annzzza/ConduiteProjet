@@ -4,12 +4,15 @@ package com.example.conduiteprojet;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-public class ChooseRoleController {
+public class RegisterController {
+    public Label errorLabel;
     @FXML
     private HBox root = new HBox();
 
@@ -65,7 +68,42 @@ public class ChooseRoleController {
 
     @FXML
     public void onPursueButtonClick(){
+        // @TODO open main window
+    }
 
+    /**
+     * Validates data for registration
+     * @return true if the data is valid.
+     */
+    private boolean validateRegisterData() {
+        boolean isDataValid = true;
+        errorLabel.setTextFill(Color.rgb(255,0,0));
+        if (roleBox.getValue() == null) {
+            errorLabel.setText("Select a role.");
+            isDataValid = false;
+        }
+        if(textFieldFirstname.getText().isEmpty()) {
+            errorLabel.setText("Firstname field is empty.");
+            isDataValid = false;
+        }
+        if(textFieldLastname.getText().isEmpty()) {
+            errorLabel.setText("Lastname field is empty.");
+            isDataValid = false;
+        }
+        if(textFieldUsername.getText().isEmpty()) {
+            errorLabel.setText("Username field is empty");
+            isDataValid = false;
+        }
+        if(textFieldPassword.getText().isEmpty()) {
+            errorLabel.setText("Password field is empty");
+            isDataValid = false;
+        }
+        if(textFieldPassword.getText().length() < 6) {
+            errorLabel.setText("Password should be longer than 6 characters.");
+            isDataValid = false;
+        }
+
+        return isDataValid;
     }
 
     /**
@@ -74,9 +112,9 @@ public class ChooseRoleController {
      */
     @FXML
     public void onValidateButtonClick() {
-        if (roleBox.getValue() != null) {
+        errorLabel.setText("");
+        if(validateRegisterData()) {
             String chosenRole = roleBox.getValue();
-            System.out.println(chosenRole);
 
             String chosenUsername = textFieldUsername.getText();
             String chosenLastname = textFieldLastname.getText();
@@ -92,21 +130,23 @@ public class ChooseRoleController {
 
             UserDaoImplementation userDaoImplementation = new UserDaoImplementation();
             try {
-                userDaoImplementation.add(newUser);
-                root.getChildren().remove(validateButton);
-                textFieldFirstname.setEditable(false);
-                textFieldLastname.setEditable(false);
-                textFieldUsername.setEditable(false);
-                textFieldPassword.setEditable(false);
-                welcomeLabel.setText("Welcome " + chosenFirstname + "!");
-                pursueButton.setVisible(true);
+                User user = userDaoImplementation.getUser(chosenUsername);
+                if(userDaoImplementation.getUser(chosenUsername) == null) {
+                    System.out.println("давай");
+                    userDaoImplementation.add(newUser);
+                    root.getChildren().remove(validateButton);
+                    textFieldFirstname.setEditable(false);
+                    textFieldLastname.setEditable(false);
+                    textFieldUsername.setEditable(false);
+                    textFieldPassword.setEditable(false);
+                    welcomeLabel.setText("Welcome " + chosenFirstname + "!");
+                    pursueButton.setVisible(true);
+                } else {
+                    errorLabel.setText("The username is already taken.");
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-
-        } else {
-            System.out.println("Choisir une valeur.");
         }
     }
 }
