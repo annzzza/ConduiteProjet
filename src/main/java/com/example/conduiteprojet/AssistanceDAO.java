@@ -24,7 +24,6 @@ public interface AssistanceDAO {
             throws SQLException;
 
 
-
     public void update(Assistance assistance)
         throws SQLException;
 }

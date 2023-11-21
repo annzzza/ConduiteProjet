@@ -2,8 +2,13 @@ package com.example.conduiteprojet;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -66,8 +71,9 @@ public class ChooseRoleController {
     }
 
     @FXML
-    public void onPursueButtonClick(){
-
+    public void onPursueButtonClick() throws Exception {
+        BrowserLoader bl = new BrowserLoader();
+        bl.start(new Stage());
     }
 
     /**

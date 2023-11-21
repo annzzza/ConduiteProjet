@@ -54,7 +54,7 @@ public class AssistanceDaoImplementation
      */
     @Override
     public Assistance getAssistance(int id) throws SQLException {
-        String query = "SELECT * FROM " + table + "WHERE id=?";
+        String query = "SELECT * FROM " + table + " WHERE id=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1,id);
         Assistance ass = new Assistance();
@@ -113,8 +113,9 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceOffers() throws SQLException{
 
-        String query = "SELECT * from " + table + "WHERE type = OFFER";
+        String query = "SELECT * from " + table + " WHERE type = ?";
         PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, "offer");
         ResultSet rs = ps.executeQuery();
         List<Assistance> offers = new ArrayList<>();
 
@@ -138,8 +139,9 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceRequests() throws SQLException{
 
-        String query = "SELECT * from " + table;
+        String query = "SELECT * from " + table + " WHERE type = ?";
         PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, "request");
         ResultSet rs = ps.executeQuery();
         List<Assistance> requests = new ArrayList<>();
 
