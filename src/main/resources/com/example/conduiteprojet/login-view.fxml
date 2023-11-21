@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="gridPane" alignment="TOP_CENTER" hgap="10" prefHeight="300.0" prefWidth="500.0" vgap="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.LogInController">
+
+    <columnConstraints>
+        <ColumnConstraints halignment="LEFT" minWidth="100.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" prefWidth="150.0" />
+        <ColumnConstraints halignment="RIGHT" minWidth="100.0" prefWidth="200.0" />
+      <ColumnConstraints />
+    </columnConstraints>
+
+    <!-- Add Header Label -->
+    <Label text="Log In" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="1">
+        <font>
+            <Font name="Arial" size="24" />
+        </font>
+        <GridPane.margin>
+            <Insets bottom="10" left="0" right="0" top="5" />
+        </GridPane.margin>
+    </Label>
+
+    <!-- Add Username Label -->
+    <Label text="Username: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <!-- Add Username Text Field -->
+    <TextField fx:id="usernameField" prefHeight="40" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+
+    <!-- Add Password Label -->
+    <Label text="Password: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <!-- Add Password Text Field -->
+    <PasswordField fx:id="passwordField" prefHeight="40" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+
+    <Label fx:id="message" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="3"/>
+    <Button fx:id="LoginButton" onAction="#onLoginButtonClick" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #00D2FF;" text="Log in" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
+      <font>
+         <Font name="System Bold" size="13.0" />
+      </font></Button>
+    <Button fx:id="RegisterButton" onAction="#onRegisterButtonClick" alignment="CENTER" prefHeight="40.0" prefWidth="300.0" text="Register" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" />
+
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+
+</GridPane>
