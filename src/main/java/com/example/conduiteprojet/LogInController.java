@@ -23,9 +23,6 @@ public class LogInController {
     @FXML
     public Label message;
 
-    @FXML
-    Button HelloButton = new Button();
-
     /**
      * Try to log in using username and password field.
      */
@@ -53,7 +50,7 @@ public class LogInController {
             UserDaoImplementation udi = new UserDaoImplementation();
             try {
                 User user = udi.getUser(username);
-                if(Objects.equals(ChooseRoleController.getMd5(password), user.getPassword())) {
+                if(Objects.equals(RegisterController.getMd5(password), user.getPassword())) {
                     message.setText("Connected!"); // @TODO Open main window
                 } else {
                     message.setText("Wrong username or password.");
@@ -70,12 +67,12 @@ public class LogInController {
      */
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LogIn.class.getResource("choose-role-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LogIn.class.getResource("register-view.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Choose a Role");
             stage.setScene(new Scene(fxmlLoader.load()));
             stage.show();
-            Stage oldStage = (Stage) HelloButton.getScene().getWindow();
+            Stage oldStage = (Stage) LoginButton.getScene().getWindow();
             oldStage.close();
         }
         catch (IOException e) {
