@@ -44,12 +44,36 @@ public class UserDaoImplementation implements UserDAO {
      */
     @Override
     public User getUser(int id) throws SQLException {
-        String query = "SELECT FROM " + table + " WHERE id_user =?";
+        String query = "SELECT * FROM " + table + " WHERE id_user =?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, id);
         User user = new User();
         ResultSet res = ps.executeQuery();
         boolean check = false;
+        while (res.next()){
+            check = true;
+            user.setFirstName(res.getString("firstname"));
+            user.setLastName(res.getString("lastname"));
+            user.setUsername(res.getString("username"));
+            user.setPassword(res.getString("password"));
+            user.setRole(res.getString("role"));
+        }
+        if (check){
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public User getUser(String username) throws SQLException {
+        String query = "SELECT * FROM " + table + " WHERE username =?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, username);
+        User user = new User();
+        ResultSet res = ps.executeQuery();
+        boolean check = false;
+        System.out.println(res);
         while (res.next()){
             check = true;
             user.setFirstName(res.getString("firstname"));
