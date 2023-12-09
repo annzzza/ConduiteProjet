@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.app.MainWindowController">
     <VBox>
@@ -18,14 +18,20 @@
             </Menu>
         </MenuBar>
 
-        <GridPane>
-            <TabPane fx:id = "tabPane" tabClosingPolicy="UNAVAILABLE"
-                     GridPane.columnIndex="0" >
-                <Tab fx:id = "titleLabel" text="default">
-                    <ListView fx:id="listAssistanceView" layoutY="69.0" prefHeight="360.0" prefWidth="600.0"/>
+        <GridPane gridLinesVisible="true">
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0">
+                <Tab fx:id="titleLabel" text="default">
+                    <ListView fx:id="listAssistanceView" fixedCellSize="0.0" layoutY="69.0" prefHeight="360.0" prefWidth="600.0" />
                 </Tab>
             </TabPane>
-            <VBox fx:id = "rightVBox" GridPane.columnIndex="1"/>
+            <columnConstraints>
+                <ColumnConstraints  percentWidth="65"/>
+            </columnConstraints>
+            <VBox fx:id="rightVBox" GridPane.columnIndex="1" />
+             <columnConstraints>
+                <ColumnConstraints  percentWidth="35"/>
+             </columnConstraints>
+
         </GridPane>
     </VBox>
 

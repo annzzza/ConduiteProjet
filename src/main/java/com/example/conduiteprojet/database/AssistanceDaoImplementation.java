@@ -169,10 +169,9 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceToValidate() throws SQLException{
 
-        String query = "SELECT * from " + table + " WHERE creator=? AND status=?";
+        String query = "SELECT * from " + table + " WHERE status=?";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setInt(1, PreferencesManager.getUserID());
-        ps.setString(2, "PENDING");
+        ps.setString(1, "PENDING");
         ResultSet rs = ps.executeQuery();
         List<Assistance> requests = new ArrayList<>();
 
