@@ -1,5 +1,6 @@
 package com.example.conduiteprojet.app;
 
+import com.example.conduiteprojet.auth.User;
 import com.example.conduiteprojet.database.AssistanceDaoImplementation;
 import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.collections.FXCollections;
@@ -20,7 +21,7 @@ public class MainWindowController {
 
     private AssistanceDaoImplementation a_daoimpl = new AssistanceDaoImplementation();
     public List<Assistance> getCorrespondingList() throws SQLException {
-        String role = PreferencesManager.getRole();
+        User.Role role = PreferencesManager.getRole();
 
         if (role.equals("Benevole")) {
             titleLabel.setText("List of Requests");
