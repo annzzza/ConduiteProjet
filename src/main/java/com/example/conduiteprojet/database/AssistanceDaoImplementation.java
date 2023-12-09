@@ -43,7 +43,7 @@ public class AssistanceDaoImplementation
      */
     @Override
     public void delete(int id) throws SQLException {
-        String query = "DELETE FROM " + table + "WHERE id=?";
+        String query = "DELETE FROM " + table + " WHERE id=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, id);
         ps.executeUpdate();
@@ -172,9 +172,9 @@ public class AssistanceDaoImplementation
     @Override
     public void update(Assistance assistance) throws SQLException {
 //      "(title, creator, description, createdAt, dueDate, status, isCancelled) "
-        String query = "UPDATE " + table + "SET"
-                + "title=?, creator=?, description=?, createdAt=?, dueDate=?, status=?, type=?, isCancelled=?"
-                + "WHERE id=?";
+        String query = "UPDATE " + table + " SET"
+                + " title=?, creator=?, description=?, createdAt=?, dueDate=?, status=?, type=?, isCancelled=?"
+                + " WHERE id=?";
         PreparedStatement ps = con.prepareStatement(query);
 
         ps.setString(1, assistance.getTitle());
@@ -185,6 +185,7 @@ public class AssistanceDaoImplementation
         ps.setString(6, assistance.getStatus().toString());
         ps.setString(7, assistance.getType().toString());
         ps.setBoolean(8, assistance.isCancelled());
+        ps.setInt(9, assistance.getId());
         ps.executeUpdate();
     }
 }
