@@ -3,6 +3,7 @@ module com.example.conduiteprojet {
     requires javafx.fxml;
     requires java.sql;
     requires java.prefs;
+    requires org.apache.logging.log4j;
 
 
 //    opens com.example.conduiteprojet to javafx.fxml;

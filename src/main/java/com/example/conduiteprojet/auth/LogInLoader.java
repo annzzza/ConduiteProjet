@@ -6,10 +6,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class LogInLoader extends Application {
+    private static final Logger LOGGER = LogManager.getLogger(LogInLoader.class);
     @Override
     public void start(Stage stage) throws IOException {
+        LOGGER.info("Starting application");
         FXMLLoader fxmlLoader = new FXMLLoader(LogInLoader.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Welcome!");
