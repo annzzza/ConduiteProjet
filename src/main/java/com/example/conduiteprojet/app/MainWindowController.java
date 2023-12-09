@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrowserController {
+public class MainWindowController {
 
     @FXML
     public ListView<String> listAssistanceView;

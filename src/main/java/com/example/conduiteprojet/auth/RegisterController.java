@@ -1,7 +1,7 @@
 package com.example.conduiteprojet.auth;
 
 
-import com.example.conduiteprojet.app.BrowserLoader;
+import com.example.conduiteprojet.app.MainWindowLoader;
 import com.example.conduiteprojet.utils.PreferencesManager;
 import com.example.conduiteprojet.database.UserDaoImplementation;
 import javafx.fxml.FXML;
@@ -73,7 +73,7 @@ public class RegisterController {
 
     @FXML
     public void onPursueButtonClick() throws Exception {
-        BrowserLoader bl = new BrowserLoader();
+        MainWindowLoader bl = new MainWindowLoader();
         bl.start(new Stage());
     }
 

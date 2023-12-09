@@ -6,11 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class BrowserLoader extends Application {
+public class MainWindowLoader extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("browser-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("main-window-view.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Browse through Assistances");
         stage.setScene(scene);
