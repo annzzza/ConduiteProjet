@@ -41,7 +41,7 @@ public class CreateAssistanceController{
             ass.setTitle(title);
             ass.setCreatorId(1); // @TODO change to current user when connexion will be set up
             ass.setDescription(descriptionField.getText());
-            ass.setStatus(Assistance.Status.OPEN);
+            ass.setStatus(Assistance.Status.PENDING);
             ass.setCancelled(false);
             if (PreferencesManager.getRole().equals("Benevole")) {
                 ass.setType(Assistance.Type.OFFER);

@@ -12,7 +12,7 @@ public class Assistance {
     }
 
     public enum Status {
-        OPEN, CLOSE
+        PENDING, ACCEPTED, REFUSED, FINISHED
     }
 
     public enum Type {
