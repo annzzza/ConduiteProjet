@@ -68,13 +68,8 @@ public class LogInController {
      */
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LogInLoader.class.getResource("register-view.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Choose a Role");
-            stage.setScene(new Scene(fxmlLoader.load()));
-            stage.show();
-            Stage oldStage = (Stage) LoginButton.getScene().getWindow();
-            oldStage.close();
+            RegisterLoader rl = new RegisterLoader();
+            rl.start(new Stage());
         }
         catch (IOException e) {
             e.printStackTrace();
