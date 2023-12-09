@@ -61,6 +61,12 @@ public class MainWindowController {
 
                         Label rightLabel = new Label("\n" + ass.getTitle() + ": Do you accept the request?\n");
                         Button confirmButton = new Button("Confirm");
+                        confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent mouseEvent) {
+                                LOGGER.info("Confirm button has been clicked.");
+                            }
+                        });
                         rightVBox.getChildren().add(rightLabel);
                         rightVBox.getChildren().add(confirmButton);
                     }
@@ -84,6 +90,12 @@ public class MainWindowController {
 
                         Label rightLabel = new Label("\n" + ass.getTitle() + ": Do you accept the offer?\n");
                         Button confirmButton = new Button("Confirm");
+                        confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent mouseEvent) {
+                                LOGGER.info("Confirm button has been clicked.");
+                            }
+                        });
                         rightVBox.getChildren().add(rightLabel);
                         rightVBox.getChildren().add(confirmButton);
 
