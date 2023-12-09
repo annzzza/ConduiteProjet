@@ -78,6 +78,7 @@ public class UserDaoImplementation implements UserDAO {
         System.out.println(res);
         while (res.next()){
             check = true;
+            user.setId(res.getInt("id_user"));
             user.setFirstName(res.getString("firstname"));
             user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
