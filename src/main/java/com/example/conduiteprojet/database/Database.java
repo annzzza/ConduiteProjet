@@ -1,4 +1,4 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

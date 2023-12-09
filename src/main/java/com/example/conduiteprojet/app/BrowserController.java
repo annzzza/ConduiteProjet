@@ -1,8 +1,8 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.app;
 
-import javafx.beans.InvalidationListener;
+import com.example.conduiteprojet.database.AssistanceDaoImplementation;
+import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

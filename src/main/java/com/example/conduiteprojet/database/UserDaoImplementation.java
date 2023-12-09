@@ -1,4 +1,6 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.database;
+
+import com.example.conduiteprojet.auth.User;
 
 import java.sql.*;
 import java.util.ArrayList;

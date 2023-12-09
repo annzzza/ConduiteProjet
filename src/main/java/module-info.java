@@ -5,6 +5,14 @@ module com.example.conduiteprojet {
     requires java.prefs;
 
 
-    opens com.example.conduiteprojet to javafx.fxml;
-    exports com.example.conduiteprojet;
+//    opens com.example.conduiteprojet to javafx.fxml;
+//    exports com.example.conduiteprojet;
+    exports com.example.conduiteprojet.database;
+    opens com.example.conduiteprojet.database to javafx.fxml;
+    exports com.example.conduiteprojet.auth;
+    opens com.example.conduiteprojet.auth to javafx.fxml;
+    exports com.example.conduiteprojet.utils;
+    opens com.example.conduiteprojet.utils to javafx.fxml;
+    exports com.example.conduiteprojet.app;
+    opens com.example.conduiteprojet.app to javafx.fxml;
 }

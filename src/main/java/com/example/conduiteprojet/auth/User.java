@@ -1,4 +1,4 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.auth;
 
 import java.io.Serializable;
 

@@ -1,4 +1,6 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.database;
+
+import com.example.conduiteprojet.app.Assistance;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

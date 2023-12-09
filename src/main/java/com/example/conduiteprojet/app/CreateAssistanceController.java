@@ -1,16 +1,15 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.app;
 
+import com.example.conduiteprojet.app.Assistance;
+import com.example.conduiteprojet.database.AssistanceDaoImplementation;
+import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.print.Printer;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.database;
 
-import com.example.conduiteprojet.Assistance;
+import com.example.conduiteprojet.app.Assistance;
 
 import java.sql.SQLException;
 import java.util.List;

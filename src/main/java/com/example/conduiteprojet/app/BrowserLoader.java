@@ -1,4 +1,4 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

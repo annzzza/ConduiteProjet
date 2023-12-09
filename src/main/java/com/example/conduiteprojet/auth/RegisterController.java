@@ -1,6 +1,9 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.auth;
 
 
+import com.example.conduiteprojet.app.BrowserLoader;
+import com.example.conduiteprojet.utils.PreferencesManager;
+import com.example.conduiteprojet.database.UserDaoImplementation;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;

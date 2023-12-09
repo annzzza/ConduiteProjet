@@ -1,8 +1,8 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.app;
+
+import com.example.conduiteprojet.database.Database;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

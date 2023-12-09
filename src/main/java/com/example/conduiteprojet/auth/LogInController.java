@@ -1,4 +1,5 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.auth;
+import com.example.conduiteprojet.database.UserDaoImplementation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,7 +68,7 @@ public class LogInController {
      */
     public void onRegisterButtonClick(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LogIn.class.getResource("register-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LogInLoader.class.getResource("register-view.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Choose a Role");
             stage.setScene(new Scene(fxmlLoader.load()));

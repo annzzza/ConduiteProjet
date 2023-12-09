@@ -1,4 +1,4 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.auth;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LogIn extends Application {
+public class LogInLoader extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LogIn.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LogInLoader.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Welcome!");
         stage.setScene(scene);
