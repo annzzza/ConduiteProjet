@@ -18,17 +18,15 @@
             </Menu>
         </MenuBar>
 
-        <HBox>
-            <VBox>
-                <Label fx:id="titleLabel" layoutX="20.0" layoutY="34.0" text="Label" textOverrun="WORD_ELLIPSIS">
-                    <font>
-                        <Font name="Khmer OS System" size="18.0" />
-                    </font>
-                </Label>
-                <ListView fx:id="listAssistanceView" layoutY="69.0" prefHeight="360.0" prefWidth="600.0"/>
-            </VBox>
-            <Label text = "TEST" />
-        </HBox>
+        <GridPane>
+            <TabPane fx:id = "tabPane" tabClosingPolicy="UNAVAILABLE"
+                     GridPane.columnIndex="0" >
+                <Tab fx:id = "titleLabel" text="default">
+                    <ListView fx:id="listAssistanceView" layoutY="69.0" prefHeight="360.0" prefWidth="600.0"/>
+                </Tab>
+            </TabPane>
+            <VBox fx:id = "rightVBox" GridPane.columnIndex="1"/>
+        </GridPane>
     </VBox>
 
 </AnchorPane>

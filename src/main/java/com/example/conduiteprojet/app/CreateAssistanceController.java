@@ -2,11 +2,13 @@ package com.example.conduiteprojet.app;
 
 import com.example.conduiteprojet.database.AssistanceDaoImplementation;
 import com.example.conduiteprojet.utils.PreferencesManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -41,7 +43,7 @@ public class CreateAssistanceController{
             ass.setCreatorId(PreferencesManager.getUserID()); // @TODO change to current user when connexion will be set up
             ass.setDescription(descriptionField.getText());
             ass.setCancelled(false);
-            if (PreferencesManager.getRole().equals("Benevole")) {
+            if (PreferencesManager.getRole().equals("BENEVOLE")) {
                 ass.setStatus(Assistance.Status.ACCEPTED);
                 ass.setType(Assistance.Type.OFFER);
             } else {
@@ -52,6 +54,10 @@ public class CreateAssistanceController{
             ass.setDueDate(new java.sql.Date(date.getTime()));
             ass.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
             assistanceDaoImpl.add(ass);
+
+
+            Stage stage = (Stage) createButton.getScene().getWindow();
+            stage.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
