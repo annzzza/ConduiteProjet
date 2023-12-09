@@ -128,7 +128,7 @@ public class RegisterController {
             String chosenPasswordHashed = getMd5(textFieldPassword.getText());
 
             User newUser = new User();
-            newUser.setRole(chosenRole);
+            newUser.setRole(User.Role.valueOf(chosenRole.toUpperCase()));
             newUser.setLastName(chosenLastname);
             newUser.setFirstName(chosenFirstname);
             newUser.setUsername(chosenUsername);
