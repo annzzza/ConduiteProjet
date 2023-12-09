@@ -1,4 +1,4 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.auth;
 
 import java.io.Serializable;
 
@@ -8,7 +8,10 @@ public class User implements Serializable {
     private String lastName;
     private String firstName;
     private String password;
-    private String role;
+    public enum Role {
+        BENEVOLE, VALIDEUR, PATIENT,
+    }
+    private Role role;
 
     public int getId() {
         return id;
@@ -50,11 +53,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

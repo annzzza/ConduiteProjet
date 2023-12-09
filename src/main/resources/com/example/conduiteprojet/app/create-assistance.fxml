@@ -7,7 +7,7 @@
 
 <GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
           hgap="10" vgap="10"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.CreateAssistanceController">
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.app.CreateAssistanceController">
 
     <columnConstraints>
         <ColumnConstraints minWidth="10.0" prefWidth="100.0" halignment="RIGHT"/>

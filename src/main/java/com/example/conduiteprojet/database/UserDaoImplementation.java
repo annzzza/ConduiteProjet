@@ -1,4 +1,6 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.database;
+
+import com.example.conduiteprojet.auth.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class UserDaoImplementation implements UserDAO {
         ps.setString(2, user.getLastName());
         ps.setString(3, user.getUsername());
         ps.setString(4, user.getPassword());
-        ps.setString(5, user.getRole());
+        ps.setString(5, user.getRole().toString());
         int i = ps.executeUpdate();
 
      }
@@ -56,7 +58,7 @@ public class UserDaoImplementation implements UserDAO {
             user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
             user.setPassword(res.getString("password"));
-            user.setRole(res.getString("role"));
+            user.setRole(User.Role.valueOf(res.getString("role").toUpperCase()));
         }
         if (check){
             return user;
@@ -80,7 +82,7 @@ public class UserDaoImplementation implements UserDAO {
             user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
             user.setPassword(res.getString("password"));
-            user.setRole(res.getString("role"));
+            user.setRole(User.Role.valueOf(res.getString("role").toUpperCase()));
         }
         if (check){
             return user;
@@ -107,7 +109,7 @@ public class UserDaoImplementation implements UserDAO {
             user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
             user.setPassword(res.getString("password"));
-            user.setRole(res.getString("role"));
+            user.setRole(User.Role.valueOf(res.getString("role").toUpperCase()));
             ls.add(user);
         }
         return ls;
@@ -126,7 +128,7 @@ public class UserDaoImplementation implements UserDAO {
         ps.setString(2, user.getLastName());
         ps.setString(3, user.getUsername());
         ps.setString(4, user.getPassword());
-        ps.setString(5, user.getRole());
+        ps.setString(5, user.getRole().toString());
         ps.executeUpdate();
     }
 }

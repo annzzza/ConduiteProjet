@@ -1,15 +1,20 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.auth;
 
 
+import com.example.conduiteprojet.app.MainWindowLoader;
+import com.example.conduiteprojet.utils.PreferencesManager;
+import com.example.conduiteprojet.database.UserDaoImplementation;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+
 
 public class RegisterController {
     public Label errorLabel;
@@ -67,8 +72,9 @@ public class RegisterController {
     }
 
     @FXML
-    public void onPursueButtonClick(){
-        // @TODO open main window
+    public void onPursueButtonClick() throws Exception {
+        MainWindowLoader bl = new MainWindowLoader();
+        bl.start(new Stage());
     }
 
     /**
@@ -122,7 +128,7 @@ public class RegisterController {
             String chosenPasswordHashed = getMd5(textFieldPassword.getText());
 
             User newUser = new User();
-            newUser.setRole(chosenRole);
+            newUser.setRole(User.Role.valueOf(chosenRole.toUpperCase()));
             newUser.setLastName(chosenLastname);
             newUser.setFirstName(chosenFirstname);
             newUser.setUsername(chosenUsername);
@@ -147,6 +153,7 @@ public class RegisterController {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        PreferencesManager.saveRole(chosenRole);
         }
     }
 }

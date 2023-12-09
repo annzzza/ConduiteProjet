@@ -1,16 +1,15 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.app;
 
+import com.example.conduiteprojet.app.Assistance;
+import com.example.conduiteprojet.database.AssistanceDaoImplementation;
+import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.print.Printer;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.List;
@@ -42,8 +41,13 @@ public class CreateAssistanceController{
             ass.setTitle(title);
             ass.setCreatorId(1); // @TODO change to current user when connexion will be set up
             ass.setDescription(descriptionField.getText());
-            ass.setStatus(Assistance.Status.OPEN);
+            ass.setStatus(Assistance.Status.PENDING);
             ass.setCancelled(false);
+            if (PreferencesManager.getRole().equals("Benevole")) {
+                ass.setType(Assistance.Type.OFFER);
+            } else {
+                ass.setType(Assistance.Type.REQUEST);
+            }
             java.util.Date date = java.util.Date.from(dueDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             ass.setDueDate(new java.sql.Date(date.getTime()));
             ass.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));

@@ -1,6 +1,6 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.database;
 
-import com.example.conduiteprojet.Assistance;
+import com.example.conduiteprojet.app.Assistance;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +15,15 @@ public interface AssistanceDAO {
         throws SQLException;
     public List<Assistance> getAssistances()
         throws SQLException;
+
+
+    public List<Assistance> getAssistanceOffers()
+            throws SQLException;
+
+    public List<Assistance> getAssistanceRequests()
+            throws SQLException;
+
+
     public void update(Assistance assistance)
         throws SQLException;
 }

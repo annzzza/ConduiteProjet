@@ -1,4 +1,4 @@
-package com.example.conduiteprojet;
+package com.example.conduiteprojet.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,18 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CreateAssistanceLoader extends Application {
+public class MainWindowLoader extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("create-assistance.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("main-window-view.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Create new assistance");
+        stage.setTitle("Browse through Assistances");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
