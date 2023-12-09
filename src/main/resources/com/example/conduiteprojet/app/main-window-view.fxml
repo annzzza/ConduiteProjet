@@ -5,26 +5,30 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conduiteprojet.app.MainWindowController">
-    <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="259.0">
-        <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Close" />
-        </Menu>
-        <Menu mnemonicParsing="false" text="Add Assistance">
-            <MenuItem mnemonicParsing="false" onAction="#onAddAssistanceButtonClick" text="Add Assistance" />
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About" />
-        </Menu>
-    </MenuBar>
+    <VBox>
+        <MenuBar layoutY="1.0" prefHeight="27.0" prefWidth="259.0">
+            <Menu mnemonicParsing="false" text="File">
+                <MenuItem mnemonicParsing="false" text="Close" />
+            </Menu>
+            <Menu mnemonicParsing="false" text="Add Assistance">
+                <MenuItem mnemonicParsing="false" onAction="#onAddAssistanceButtonClick" text="Add Assistance" />
+            </Menu>
+            <Menu mnemonicParsing="false" text="Refresh">
+                <MenuItem mnemonicParsing="false" onAction="#onRefreshButtonClick" text="About" />
+            </Menu>
+        </MenuBar>
 
-    <Label fx:id="titleLabel" layoutX="20.0" layoutY="34.0" text="Label" textOverrun="WORD_ELLIPSIS">
-        <font>
-            <Font name="Khmer OS System" size="18.0" />
-        </font>
-    </Label>
-
-
-    <ListView fx:id="listAssistanceView" layoutY="69.0" prefHeight="360.0" prefWidth="600.0">
-    </ListView>
+        <HBox>
+            <VBox>
+                <Label fx:id="titleLabel" layoutX="20.0" layoutY="34.0" text="Label" textOverrun="WORD_ELLIPSIS">
+                    <font>
+                        <Font name="Khmer OS System" size="18.0" />
+                    </font>
+                </Label>
+                <ListView fx:id="listAssistanceView" layoutY="69.0" prefHeight="360.0" prefWidth="600.0"/>
+            </VBox>
+            <Label text = "TEST" />
+        </HBox>
+    </VBox>
 
 </AnchorPane>

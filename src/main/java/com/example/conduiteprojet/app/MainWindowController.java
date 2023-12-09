@@ -1,5 +1,6 @@
 package com.example.conduiteprojet.app;
 
+import com.example.conduiteprojet.auth.User;
 import com.example.conduiteprojet.database.AssistanceDaoImplementation;
 import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.collections.FXCollections;
@@ -19,12 +20,15 @@ public class MainWindowController {
     public Label titleLabel;
 
     private AssistanceDaoImplementation a_daoimpl = new AssistanceDaoImplementation();
+    String role = PreferencesManager.getRole();
     public List<Assistance> getCorrespondingList() throws SQLException {
-        String role = PreferencesManager.getRole();
 
         if (role.equals("Benevole")) {
             titleLabel.setText("List of Requests");
             return a_daoimpl.getAssistanceRequests();
+        } else if ( role.equals("Valideur")) {
+            titleLabel.setText("List of Pending Requests");
+            return  a_daoimpl.getAssistanceToValidate();
         } else {
             titleLabel.setText("List of Offers");
             return a_daoimpl.getAssistanceOffers();
@@ -35,13 +39,20 @@ public class MainWindowController {
         List<Assistance> listAss = getCorrespondingList();
         List<String> listStringAss = new ArrayList<String>();
 
-        for(int i=0;i<listAss.size();i++){
-            listStringAss.add("Title: " + listAss.get(i).getTitle());
-            listStringAss.add("Description: " + listAss.get(i).getDescription());
-            listStringAss.add("Due date: " + listAss.get(i).getDueDate().toString());
-            //listStringAss.add(listAss.get(i).getCreatorName());
-            listStringAss.add("");
+        if (role.equals("BENEVOLE")){
+            for(final Assistance ass : listAss) {
+                listStringAss.add("\nTitle: " + ass.getTitle() + "\n" + "Description: " + ass.getDescription() + "\n" + "Due date: " + ass.getDueDate().toString() + "\n ");
+
+                System.out.println(ass.getCreatorId());
+            }
+        } else if (role.equals("PATIENT")) {
+            for(final Assistance ass : listAss) {
+                listStringAss.add("\nTitle: " + ass.getTitle() + "\n" + "Description: " + ass.getDescription() + "\n" + "Due date: " + ass.getDueDate().toString() + "\n "+ "Status: " + ass.getStatus() + "\n ");
+            }
         }
+
+
+        System.out.println(role);
 
         ObservableList<String> observableListAssistance = FXCollections.observableArrayList(listStringAss);
         listAssistanceView.setItems(observableListAssistance);
@@ -53,5 +64,10 @@ public class MainWindowController {
         CreateAssistanceLoader loader = new CreateAssistanceLoader();
         loader.start(new Stage());
         initialize();
+    }
+
+    public void onRefreshButtonClick(){
+        //todo
+        //listAssistanceView.refresh();
     }
 }

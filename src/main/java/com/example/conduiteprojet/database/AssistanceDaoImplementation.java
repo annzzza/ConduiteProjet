@@ -1,6 +1,7 @@
 package com.example.conduiteprojet.database;
 
 import com.example.conduiteprojet.app.Assistance;
+import com.example.conduiteprojet.utils.PreferencesManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class AssistanceDaoImplementation
                 +"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, assistance.getTitle());
-        ps.setInt(2, assistance.getCreatorId());
+        ps.setInt(2, PreferencesManager.getUserID());
         ps.setString(3, assistance.getDescription());
         ps.setDate(4, assistance.getCreatedAt());
         ps.setDate(5, assistance.getDueDate());
@@ -141,9 +142,10 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceRequests() throws SQLException{
 
-        String query = "SELECT * from " + table + " WHERE type = ?";
+        String query = "SELECT * from " + table + " WHERE creator = ? AND status =?";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, "request");
+        ps.setInt(1, PreferencesManager.getUserID());
+        ps.setString(2, "ACCEPTED");
         ResultSet rs = ps.executeQuery();
         List<Assistance> requests = new ArrayList<>();
 
@@ -164,6 +166,32 @@ public class AssistanceDaoImplementation
         return requests;
     }
 
+
+    public List<Assistance> getAssistanceToValidate() throws SQLException{
+
+        String query = "SELECT * from " + table + " WHERE creator=? AND status=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, PreferencesManager.getUserID());
+        ps.setString(2, "PENDING");
+        ResultSet rs = ps.executeQuery();
+        List<Assistance> requests = new ArrayList<>();
+
+        while(rs.next()) {
+            Assistance ass = new Assistance();
+            ass.setId(rs.getInt("id"));
+            ass.setTitle(rs.getString("title"));
+            ass.setCreatorId(rs.getInt("creator"));
+            ass.setDescription(rs.getString("description"));
+            ass.setStatus(Assistance.Status.valueOf(rs.getString("status").toUpperCase()));
+            ass.setType(Assistance.Type.valueOf(rs.getString("type").toUpperCase()));
+            ass.setCancelled(rs.getBoolean("isCancelled"));
+            ass.setDueDate(rs.getDate("dueDate"));
+            ass.setCreatedAt(rs.getDate("createdAt"));
+            requests.add(ass);
+        }
+
+        return requests;
+    }
 
     /**
      * @param assistance 

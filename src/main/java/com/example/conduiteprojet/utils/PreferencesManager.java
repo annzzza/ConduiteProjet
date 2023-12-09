@@ -11,6 +11,11 @@ public class PreferencesManager {
     }
 
     public static String getRole() {
-        return preferences.get("userRole", "Benevole");
+        return preferences.get("userRole", "PATIENT");
     }
+
+    public static void saveUserID(int userID) { preferences.put("userID", String.valueOf(userID)); }
+
+    public static int getUserID() { return Integer.parseInt(preferences.get("userName", "68")); }
+
 }

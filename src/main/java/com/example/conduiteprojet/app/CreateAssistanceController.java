@@ -1,6 +1,5 @@
 package com.example.conduiteprojet.app;
 
-import com.example.conduiteprojet.app.Assistance;
 import com.example.conduiteprojet.database.AssistanceDaoImplementation;
 import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.event.ActionEvent;
@@ -39,13 +38,14 @@ public class CreateAssistanceController{
             String title = titleField.getText();
             Assistance ass = new Assistance();
             ass.setTitle(title);
-            ass.setCreatorId(1); // @TODO change to current user when connexion will be set up
+            ass.setCreatorId(PreferencesManager.getUserID()); // @TODO change to current user when connexion will be set up
             ass.setDescription(descriptionField.getText());
-            ass.setStatus(Assistance.Status.PENDING);
             ass.setCancelled(false);
             if (PreferencesManager.getRole().equals("Benevole")) {
+                ass.setStatus(Assistance.Status.ACCEPTED);
                 ass.setType(Assistance.Type.OFFER);
             } else {
+                ass.setStatus(Assistance.Status.PENDING);
                 ass.setType(Assistance.Type.REQUEST);
             }
             java.util.Date date = java.util.Date.from(dueDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
