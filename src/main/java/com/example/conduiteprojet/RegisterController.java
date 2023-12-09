@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+
 public class RegisterController {
     public Label errorLabel;
     @FXML
@@ -67,8 +68,9 @@ public class RegisterController {
     }
 
     @FXML
-    public void onPursueButtonClick(){
-        // @TODO open main window
+    public void onPursueButtonClick() throws Exception {
+        BrowserLoader bl = new BrowserLoader();
+        bl.start(new Stage());
     }
 
     /**
@@ -147,6 +149,7 @@ public class RegisterController {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        PreferencesManager.saveRole(chosenRole);
         }
     }
 }
