@@ -111,6 +111,6 @@ public class Assistance {
         ps.setInt(1, this.getCreatorId());
         ResultSet rs = ps.executeQuery();
 
-        return rs.getString("firstname");
+        return rs.getString("firstname")+" " + rs.getString("lastname");
     }
 }

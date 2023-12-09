@@ -139,9 +139,9 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceRequests() throws SQLException{
 
-        String query = "SELECT * from " + table + " WHERE type = ?";
+        String query = "SELECT * from " + table + " WHERE creator = ?";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, "request");
+        ps.setString(1, PreferencesManager.getUserIDString());
         ResultSet rs = ps.executeQuery();
         List<Assistance> requests = new ArrayList<>();
 

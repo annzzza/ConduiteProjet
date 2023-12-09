@@ -13,4 +13,8 @@ public class PreferencesManager {
     public static String getRole() {
         return preferences.get("userRole", "Benevole");
     }
+
+    public static void saveUserID(int userID) { preferences.put("userID", String.valueOf(userID)); }
+
+    public static String getUserIDString() { return preferences.get("userName", "-1"); }
 }

@@ -35,12 +35,8 @@ public class BrowserController {
         List<Assistance> listAss = getCorrespondingList();
         List<String> listStringAss = new ArrayList<String>();
 
-        for(int i=0;i<listAss.size();i++){
-            listStringAss.add("Title: " + listAss.get(i).getTitle());
-            listStringAss.add("Description: " + listAss.get(i).getDescription());
-            listStringAss.add("Due date: " + listAss.get(i).getDueDate().toString());
-            //listStringAss.add(listAss.get(i).getCreatorName());
-            listStringAss.add("");
+        for(final Assistance ass : listAss){
+            listStringAss.add("\nTitle: " + ass.getTitle() + "\n" + "Description: " + ass.getDescription() + "\n" + "Due date: " + ass.getDueDate().toString() + "\n ");
         }
 
         ObservableList<String> observableListAssistance = FXCollections.observableArrayList(listStringAss);
