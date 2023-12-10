@@ -118,7 +118,7 @@ public class AssistanceDaoImplementation
 
         String query = "SELECT * from " + table + " WHERE type = ?";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, "offer");
+        ps.setString(1, "OFFER");
         ResultSet rs = ps.executeQuery();
         List<Assistance> offers = new ArrayList<>();
 
@@ -142,10 +142,11 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceRequests() throws SQLException{
 
-        String query = "SELECT * from " + table + " WHERE creator = ? AND status =?";
+        String query = "SELECT * from " + table + " WHERE creator = ? AND status =? AND type=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, PreferencesManager.getUserID());
         ps.setString(2, "ACCEPTED");
+        ps.setString(3, "REQUEST");
         ResultSet rs = ps.executeQuery();
         List<Assistance> requests = new ArrayList<>();
 
@@ -169,9 +170,10 @@ public class AssistanceDaoImplementation
 
     public List<Assistance> getAssistanceToValidate() throws SQLException{
 
-        String query = "SELECT * from " + table + " WHERE status=?";
+        String query = "SELECT * from " + table + " WHERE status=? AND type=?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, "PENDING");
+        ps.setString(2, "REQUEST");
         ResultSet rs = ps.executeQuery();
         List<Assistance> requests = new ArrayList<>();
 
