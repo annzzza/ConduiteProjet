@@ -64,7 +64,7 @@ public class MainWindowController {
         rightVBox.setSpacing(10);
         rightVBox.setPadding(new Insets(15,20, 10,10));
         Label rightLabel = new Label();
-        if(role.equals(User.Role.BENEVOLE)) {
+        if(role.equals(User.Role.BENEVOLE) || role.equals(User.Role.PATIENT)) {
             rightLabel.setText("\n" + ass.getTitle() + ": Do you accept the " + ass.getType().toString() +"?\n");
         } else if(role.equals(User.Role.VALIDEUR)) {
             rightLabel.setText("\n" + ass.getTitle() + ": Do you validate the " + ass.getType().toString() +"?\n");
@@ -77,7 +77,7 @@ public class MainWindowController {
 
                 LOGGER.info("Confirm button has been clicked.");
 
-                if (role.equals(User.Role.BENEVOLE)) {
+                if (role.equals(User.Role.BENEVOLE) || role.equals(User.Role.PATIENT)) {
                     try {
                         ass.setStatus(Assistance.Status.FINISHED);
                         a_daoimpl.update(ass);
@@ -115,21 +115,24 @@ public class MainWindowController {
         HBox hBox = new HBox();
         hBox.setSpacing(10);
         hBox.setPadding(new Insets(15,20, 10,10));
-        Button answerButton = new Button();
-        if(role.equals(User.Role.BENEVOLE)) {
-            answerButton.setText("Take");
-        } else if (role.equals(User.Role.VALIDEUR)) {
-            answerButton.setText("Validate");
-        }
-        answerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                LOGGER.info( answerButton.getText() + " " + ass.getType().toString() +" button has been clicked.");
-                answerButton.setDisable(false);
-                addToRightPanel(ass);
+        if(!ass.getStatus().equals(Assistance.Status.FINISHED)) {
+            Button answerButton = new Button();
+            if(role.equals(User.Role.BENEVOLE) || role.equals(User.Role.PATIENT)) {
+                answerButton.setText("Take");
+            } else if (role.equals(User.Role.VALIDEUR)) {
+                answerButton.setText("Validate");
             }
-        });
-        hBox.getChildren().add(answerButton);
+            answerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    LOGGER.info( answerButton.getText() + " " + ass.getType().toString() +" button has been clicked.");
+                    answerButton.setDisable(true);
+                    addToRightPanel(ass);
+                }
+            });
+            hBox.getChildren().add(answerButton);
+        }
+
         hBox.getChildren().add(new Label("\nTitle: " + ass.getTitle() + "\n" + "Description: " + ass.getDescription() + "\n" + "Created by: " + ass.getCreatorName() + "\n" + "Due date: " + ass.getDueDate().toString() + "\n"+ "Status: " + ass.getStatus() + "\n "));
         return hBox;
     }
