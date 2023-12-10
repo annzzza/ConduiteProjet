@@ -168,10 +168,8 @@ public class MainWindowController {
      * Button click handler, refreshes list of Assistance
      */
     public void onRefreshButtonClick(){
-
         LOGGER.info("Refresh list Button has been clicked.");
 
-        //todo
-        //listAssistanceView.refresh();
+        // to be done
     }
 }

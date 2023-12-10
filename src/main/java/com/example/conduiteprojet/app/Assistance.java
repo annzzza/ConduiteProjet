@@ -104,7 +104,11 @@ public class Assistance {
         this.title = title;
     }
 
-    //TODO fix this request
+
+    /**
+     * @return String firstname of Assistance's creator.
+     * @throws SQLException
+     */
     public String getCreatorName() throws SQLException {
         String query = "SELECT firstname FROM user WHERE id_user = ?";
         PreparedStatement ps = con.prepareStatement(query);

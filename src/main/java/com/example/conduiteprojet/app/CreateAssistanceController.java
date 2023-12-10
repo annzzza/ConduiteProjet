@@ -46,7 +46,7 @@ public class CreateAssistanceController{
             String title = titleField.getText();
             Assistance ass = new Assistance();
             ass.setTitle(title);
-            ass.setCreatorId(PreferencesManager.getUserID()); // @TODO change to current user when connexion will be set up
+            ass.setCreatorId(PreferencesManager.getUserID());
             ass.setDescription(descriptionField.getText());
             ass.setCancelled(false);
             if (PreferencesManager.getRole().equals("BENEVOLE")) {
