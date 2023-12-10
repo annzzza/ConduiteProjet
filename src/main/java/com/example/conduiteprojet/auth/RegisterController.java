@@ -127,7 +127,7 @@ public class RegisterController {
                 textFieldLastname.setEditable(false);
                 textFieldUsername.setEditable(false);
                 textFieldPassword.setEditable(false);
-                welcomeLabel.setText("Welcome " + textFieldFirstname + "!");
+                welcomeLabel.setText("Welcome " + textFieldFirstname.getText() + "!");
                 welcomeLabel.setTextFill(Color.rgb(74, 254, 0));
 
                 pursueButton.setVisible(true);

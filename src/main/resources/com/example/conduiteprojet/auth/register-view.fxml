@@ -46,6 +46,7 @@
     <ChoiceBox fx:id="roleBox" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.halignment="CENTER">
         <String fx:value="Patient"/>
         <String fx:value="Benevole"/>
+        <String fx:value="Valideur"/>
     </ChoiceBox>
 
     <Label fx:id="errorLabel" GridPane.columnSpan="3" GridPane.rowIndex="7"/>
