@@ -67,7 +67,9 @@ public class MainWindowController {
         confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+
                 LOGGER.info("Confirm button has been clicked.");
+
                 rightLabel.setText("Accepted!");
                 confirmButton.setVisible(false);
             }
@@ -91,6 +93,7 @@ public class MainWindowController {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 LOGGER.info("Take " + ass.getType().toString() +" button has been clicked.");
+                answerButton.setDisable(false);
                 addToRightPanel(ass);
             }
         });
