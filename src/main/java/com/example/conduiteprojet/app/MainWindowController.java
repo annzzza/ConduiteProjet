@@ -60,16 +60,42 @@ public class MainWindowController {
      *
      * @param ass Assistance to be managed in right panel
      */
-    public void addToRightPanel(Assistance ass){
+    public void addToRightPanel(Assistance ass)  {
         rightVBox.setSpacing(10);
         rightVBox.setPadding(new Insets(15,20, 10,10));
-        Label rightLabel = new Label("\n" + ass.getTitle() + ": Do you accept the " + ass.getType().toString() +"?\n");
+        Label rightLabel = new Label();
+        if(role.equals(User.Role.BENEVOLE) || role.equals(User.Role.PATIENT)) {
+            rightLabel.setText("\n" + ass.getTitle() + ": Do you accept the " + ass.getType().toString() +"?\n");
+        } else if(role.equals(User.Role.VALIDEUR)) {
+            rightLabel.setText("\n" + ass.getTitle() + ": Do you validate the " + ass.getType().toString() +"?\n");
+        }
+
         Button confirmButton = new Button("Confirm");
         confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
                 LOGGER.info("Confirm button has been clicked.");
+
+                if (role.equals(User.Role.BENEVOLE) || role.equals(User.Role.PATIENT)) {
+                    try {
+                        ass.setStatus(Assistance.Status.FINISHED);
+                        a_daoimpl.update(ass);
+                        refreshAssList();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
+                } else if (role.equals(User.Role.VALIDEUR)) {
+                    try {
+                        ass.setStatus(Assistance.Status.ACCEPTED);
+                        a_daoimpl.update(ass);
+                        refreshAssList();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
 
                 rightLabel.setText("Accepted!");
                 confirmButton.setVisible(false);
@@ -89,53 +115,56 @@ public class MainWindowController {
         HBox hBox = new HBox();
         hBox.setSpacing(10);
         hBox.setPadding(new Insets(15,20, 10,10));
-        Button answerButton = new Button("Take");
-        answerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                LOGGER.info("Take " + ass.getType().toString() +" button has been clicked.");
-                answerButton.setDisable(false);
-                addToRightPanel(ass);
+        if(!ass.getStatus().equals(Assistance.Status.FINISHED)) {
+            Button answerButton = new Button();
+            if(role.equals(User.Role.BENEVOLE) || role.equals(User.Role.PATIENT)) {
+                answerButton.setText("Take");
+            } else if (role.equals(User.Role.VALIDEUR)) {
+                answerButton.setText("Validate");
             }
-        });
-        hBox.getChildren().add(answerButton);
+            answerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    LOGGER.info( answerButton.getText() + " " + ass.getType().toString() +" button has been clicked.");
+                    answerButton.setDisable(true);
+                    addToRightPanel(ass);
+                }
+            });
+            hBox.getChildren().add(answerButton);
+        }
+
         hBox.getChildren().add(new Label("\nTitle: " + ass.getTitle() + "\n" + "Description: " + ass.getDescription() + "\n" + "Created by: " + ass.getCreatorName() + "\n" + "Due date: " + ass.getDueDate().toString() + "\n"+ "Status: " + ass.getStatus() + "\n "));
         return hBox;
     }
 
+    public void refreshAssList() throws SQLException {
+        List<Assistance> listAss = getCorrespondingList();
+        List<HBox> listStringAss = new ArrayList<HBox>();
+
+        for(final Assistance ass : listAss) {
+            listStringAss.add(createListElementHBox(ass));
+        }
+        //Create and set ListView's Generating List
+        ObservableList<HBox> observableListAssistance = FXCollections.observableArrayList(listStringAss);
+        listAssistanceView.setItems(observableListAssistance);
+    }
     /**
      * Initialize Browsable List of Assistance in a ListView
      *
      * @throws SQLException
      */
     public void initialize() throws SQLException {
-        List<Assistance> listAss = getCorrespondingList();
-        List<HBox> listStringAss = new ArrayList<HBox>();
-
         LOGGER.info("Initialization of Main Window has started.");
 
         if (role.equals(User.Role.BENEVOLE)){
-
-            LOGGER.info("Displaying List of Requests");
-
             titleLabel.setText("List of Requests");
-            for(final Assistance ass : listAss) {
-                listStringAss.add(createListElementHBox(ass));
 
-                //Add a Tab for a Benevole to see his own Offers
-                Tab selfRequestsTab = new Tab("My Offers");
-                selfRequestsTab.setContent(new Label("Nothing to see there yet"));
-                tabPane.getTabs().add(selfRequestsTab);
-            }
+            //Add a Tab for a Benevole to see his own Offers
+            Tab selfRequestsTab = new Tab("My Offers");
+            selfRequestsTab.setContent(new Label("Nothing to see there yet"));
+            tabPane.getTabs().add(selfRequestsTab);
         } else if (role.equals(User.Role.PATIENT)) {
-
-            LOGGER.info("Displaying List of Offers");
-
-
             titleLabel.setText("List of Offers");
-            for(final Assistance ass : listAss) {
-                listStringAss.add(createListElementHBox(ass));
-            }
 
             //Added a Tab for a Patient to see his own Requests
             Tab selfRequestsTab = new Tab("My Requests");
@@ -143,14 +172,13 @@ public class MainWindowController {
             tabPane.getTabs().add(selfRequestsTab);
         } else {
 
-            LOGGER.info("Displaying List of Pending Requests");
-
             titleLabel.setText("List of Pending Requests");
         }
 
-        //Create and set ListView's Generating List
-        ObservableList<HBox> observableListAssistance = FXCollections.observableArrayList(listStringAss);
-        listAssistanceView.setItems(observableListAssistance);
+        LOGGER.info("Displaying List of Assistance");
+        refreshAssList();
+
+
     }
 
 
