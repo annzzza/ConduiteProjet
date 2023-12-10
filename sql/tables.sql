@@ -1,22 +1,27 @@
-CREATE TABLE user
+create table user
 (
-    id_user   MEDIUMINT NOT NULL AUTO_INCREMENT,
-    username  VARCHAR,
-    firstname VARCHAR,
-    lastname  VARCHAR,
-    password  VARCHAR,
-    role      VARCHAR, -- p-e enum,
-    PRIMARY KEY (idUser)
+    id_user   int auto_increment
+        primary key,
+    firstname varchar(255)                             null,
+    lastname  varchar(255)                             null,
+    username  varchar(255)                             null,
+    password  varchar(255)                             null,
+    role      enum ('BENEVOLE', 'PATIENT', 'VALIDEUR') null
 );
 
-CREATE TABLE assistance
+create table assistance
 (
-    id_assistance MEDIUMINT NOT NULL AUTO_INCREMENT,
-    description   TEXT DEFAULT '',
-    created_at    DATETIME,
-    due_date      DATETIME,
-    creator     INT NOT NULL,
-    FOREIGN KEY (creator)
-        REFERENCES user(user_id)
-        ON DELETE CASCADE
-)
+    id          int auto_increment
+        primary key,
+    title       text                                                null,
+    creator     int                                                 not null,
+    description text                                                null,
+    type        enum ('REQUEST', 'OFFER')                           null,
+    status      enum ('PENDING', 'ACCEPTED', 'REFUSED', 'FINISHED') null,
+    isCancelled tinyint(1)                                          null,
+    dueDate     datetime                                            null,
+    createdAt   datetime                                            null,
+    constraint assistance_user_id_user_fk
+        foreign key (creator) references user (id_user)
+            on update cascade on delete cascade
+);
