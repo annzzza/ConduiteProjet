@@ -48,8 +48,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ steps.extract_version.outputs.version }}
-          release_name: Release-${{ steps.extract_version.outputs.version }}
+          tag_name: ${{ steps.project.outputs.version }}
+          release_name: Release-${{ steps.project.outputs.version }}
           draft: false
           prerelease: false
           body: "Release ${{ steps.extract_version.outputs.version }}"
@@ -60,8 +60,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/ConduiteProjet-${{steps.extract_version.outputs.version}}-shaded.jar
-          asset_name: Release-${{ steps.extract_version.outputs.version }}.jar
+          asset_path: ./target/ConduiteProjet-${{steps.project.outputs.version}}-shaded.jar
+          asset_name: Release-${{ steps.project.outputs.version }}.jar
           asset_content_type: application/jar
 
   build:
