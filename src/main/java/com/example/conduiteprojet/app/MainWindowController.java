@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -43,6 +44,23 @@ public class MainWindowController {
         }
     }
 
+    public void addToRightPanel(Assistance ass){
+        rightVBox.setSpacing(10);
+        rightVBox.setPadding(new Insets(15,20, 10,10));
+        Label rightLabel = new Label("\n" + ass.getTitle() + ": Do you accept the " + ass.getType().toString() +"?\n");
+        Button confirmButton = new Button("Confirm");
+        confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                LOGGER.info("Confirm button has been clicked.");
+                rightLabel.setText("Accepted!");
+                confirmButton.setVisible(false);
+            }
+        });
+        rightVBox.getChildren().add(rightLabel);
+        rightVBox.getChildren().add(confirmButton);
+    }
+
     public void initialize() throws SQLException {
         List<Assistance> listAss = getCorrespondingList();
         List<HBox> listStringAss = new ArrayList<HBox>();
@@ -53,22 +71,14 @@ public class MainWindowController {
             titleLabel.setText("List of Requests");
             for(final Assistance ass : listAss) {
                 HBox hBox = new HBox();
+                hBox.setSpacing(10);
+                hBox.setPadding(new Insets(15,20, 10,10));
                 Button answerButton = new Button("Accept");
                 answerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         LOGGER.info("Accept request button has been clicked.");
-
-                        Label rightLabel = new Label("\n" + ass.getTitle() + ": Do you accept the request?\n");
-                        Button confirmButton = new Button("Confirm");
-                        confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent mouseEvent) {
-                                LOGGER.info("Confirm button has been clicked.");
-                            }
-                        });
-                        rightVBox.getChildren().add(rightLabel);
-                        rightVBox.getChildren().add(confirmButton);
+                        addToRightPanel(ass);
                     }
                 });
                 hBox.getChildren().add(answerButton);
@@ -78,27 +88,21 @@ public class MainWindowController {
                 System.out.println(ass.getCreatorId());
             }
         } else if (role.equals("PATIENT")) {
+
+            LOGGER.info("HELLOOO");
+
             titleLabel.setText("List of Offers");
 
             for(final Assistance ass : listAss) {
                 HBox hBox = new HBox();
+                hBox.setSpacing(10);
+                hBox.setPadding(new Insets(15,20, 10,10));
                 Button answerButton = new Button("Take");
                 answerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         LOGGER.info("Take offer button has been clicked.");
-
-                        Label rightLabel = new Label("\n" + ass.getTitle() + ": Do you accept the offer?\n");
-                        Button confirmButton = new Button("Confirm");
-                        confirmButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent mouseEvent) {
-                                LOGGER.info("Confirm button has been clicked.");
-                            }
-                        });
-                        rightVBox.getChildren().add(rightLabel);
-                        rightVBox.getChildren().add(confirmButton);
-
+                        addToRightPanel(ass);
                     }
                 });
                 hBox.getChildren().add(answerButton);

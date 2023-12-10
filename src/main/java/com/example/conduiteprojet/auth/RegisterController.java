@@ -147,6 +147,7 @@ public class RegisterController {
                     textFieldPassword.setEditable(false);
                     welcomeLabel.setText("Welcome " + chosenFirstname + "!");
                     pursueButton.setVisible(true);
+                    PreferencesManager.saveRole(newUser.getRole().toString());
                 } else {
                     errorLabel.setText("The username is already taken.");
                 }

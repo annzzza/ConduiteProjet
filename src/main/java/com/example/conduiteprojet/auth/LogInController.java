@@ -59,6 +59,7 @@ public class LogInController {
                 if(Objects.equals(RegisterController.getMd5(password), user.getPassword())) {
                     message.setText("Connected!");
                     PreferencesManager.saveUserID(user.getId());
+                    PreferencesManager.saveRole(user.getRole().toString());
 
                     LOGGER.info(PreferencesManager.getUserID());
 
