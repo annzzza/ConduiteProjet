@@ -61,7 +61,7 @@ public class LogInController {
                     PreferencesManager.saveUserID(user.getId());
                     PreferencesManager.saveRole(user.getRole().toString());
 
-                    LOGGER.info(PreferencesManager.getUserID());
+                    LOGGER.info("Connected User with ID : " + PreferencesManager.getUserID() + " and with Role : " + PreferencesManager.getRole());
 
                     MainWindowLoader mwl = new MainWindowLoader();
                     mwl.start(new Stage());

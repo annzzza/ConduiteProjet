@@ -9,14 +9,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Locale;
 
 
 public class CreateAssistanceController{
+
+    private static final Logger LOGGER = LogManager.getLogger(CreateAssistanceController.class);
+
 
     public TextField titleField;
     public TextField descriptionField;
@@ -55,6 +61,7 @@ public class CreateAssistanceController{
             ass.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
             assistanceDaoImpl.add(ass);
 
+            LOGGER.info("Created Assistance with Creator ID = " + ass.getCreatorId());
 
             Stage stage = (Stage) createButton.getScene().getWindow();
             stage.close();

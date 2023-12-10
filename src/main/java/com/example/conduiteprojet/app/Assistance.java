@@ -110,7 +110,10 @@ public class Assistance {
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, this.getCreatorId());
         ResultSet rs = ps.executeQuery();
-
-        return rs.getString("firstname");
+        if (rs.next()){
+            return rs.getString("firstname");
+        } else {
+            return "";
+        }
     }
 }
