@@ -1,7 +1,9 @@
 package com.example.conduiteprojet.auth;
+
 import com.example.conduiteprojet.app.MainWindowLoader;
 import com.example.conduiteprojet.database.UserDaoImplementation;
 import com.example.conduiteprojet.utils.PreferencesManager;
+import com.example.conduiteprojet.utils.Security;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +20,6 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class LogInController {
-
     private static final Logger LOGGER = LogManager.getLogger(LogInController.class);
 
     public TextField usernameField;
@@ -30,49 +31,97 @@ public class LogInController {
     public Label message;
 
     /**
+     * Validate data and show error messages if needed.
+     *
+     * @return whether the data is valid or not
+     */
+    protected boolean dataValidation() {
+        boolean isDataValid = true;
+
+        // Get fields
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        // Reset messageLabel
+        message.setText("");
+
+        // Check whether username field is valid
+        if (username == null || username.isEmpty()) {
+            message.setText("Please fill username.");
+            message.setTextFill(Color.rgb(210, 39, 30));
+            isDataValid = false;
+        }
+        // Check whether password field is valid
+        if (password == null || password.isEmpty()) {
+            message.setText("Please fill password.");
+            message.setTextFill(Color.rgb(210, 39, 30));
+            isDataValid = false;
+        }
+
+        return isDataValid;
+    }
+
+    /**
+     * Try to log in.
+     * When the user is logged in, its id is saved.
+     * @param username User username
+     * @param password User password in clear
+     * @return whether the user has been connected
+     */
+    public static boolean login(String username, String password) {
+        // Get user from username from DB
+        UserDaoImplementation udi = new UserDaoImplementation();
+        try {
+            User user = udi.getUser(username);
+            if (user == null) {
+                LOGGER.info(String.format("User with username '%s' not found.", username));
+                return false;
+            }
+            LOGGER.info(String.format("User with username '%s' found.", username));
+
+            if (Objects.equals(Security.getMd5(password), user.getPassword())) {
+                LOGGER.info("Credentials are valid.");
+                PreferencesManager.saveID(user.getId());
+                PreferencesManager.saveRole(user.getRole());
+                LOGGER.info(("User id saved to preferences."));
+                return true;
+            } else {
+                LOGGER.info("Credentials are wrong.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error("SQL Exception:" + e);
+            return false;
+        }
+    }
+
+    /**
      * Try to log in using username and password field.
      */
     @FXML
     protected void onLoginButtonClick() {
-
-        // Data Validation
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        message.setText("");
-        boolean errorDetected = false;
-        if(username == null || username.isEmpty()) {
-            message.setText("Please fill username.");
-            message.setTextFill(Color.rgb(210, 39, 30));
-            errorDetected = true;
-        }
-        if(password == null || password.isEmpty()) {
-            message.setText("Please fill password.");
-            message.setTextFill(Color.rgb(210, 39, 30));
-            errorDetected = true;
-        }
-
         // If data is valid -> try log in
-        if(!errorDetected) {
-            UserDaoImplementation udi = new UserDaoImplementation();
-            try {
-                User user = udi.getUser(username);
-                if(Objects.equals(RegisterController.getMd5(password), user.getPassword())) {
-                    message.setText("Connected!");
-                    PreferencesManager.saveUserID(user.getId());
-                    PreferencesManager.saveRole(user.getRole().toString());
+        if (dataValidation()) {
+            // Get fields
+            String username = usernameField.getText();
+            String password = passwordField.getText();
 
-                    LOGGER.info("Connected User with ID : " + PreferencesManager.getUserID() + " and with Role : " + PreferencesManager.getRole());
+            if(login(username, password)) {
+                message.setText("Connected!");
 
+                try {
                     MainWindowLoader mwl = new MainWindowLoader();
                     mwl.start(new Stage());
-                } else {
-                    message.setText("Wrong username or password.");
-                    message.setTextFill(Color.rgb(210, 39, 30));
+                } catch (Exception e) {
+                    LOGGER.error("Cannot open Main Window");
+                    message.setText("Something went wrong.");
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+
+                this.close();
+            } else {
+                message.setText("Wrong username or password.");
+                message.setTextFill(Color.rgb(210, 39, 30));
             }
         }
     }
@@ -80,13 +129,22 @@ public class LogInController {
     /**
      * Opens the register page.
      */
-    public void onRegisterButtonClick(ActionEvent actionEvent) {
+    public void onRegisterButtonClick() {
         try {
             RegisterLoader rl = new RegisterLoader();
             rl.start(new Stage());
+
+            this.close();
+        } catch (IOException e) {
+            LOGGER.error(e.toString());
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    }
+
+    /**
+     * Close this window.
+     */
+    private void close() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        stage.close();
     }
 }

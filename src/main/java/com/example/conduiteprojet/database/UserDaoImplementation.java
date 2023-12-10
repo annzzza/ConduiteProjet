@@ -9,10 +9,8 @@ public class UserDaoImplementation implements UserDAO {
 
     static Connection con = Database.getDBConnection();
     static String table = "user";
-    /**
-     * @param user
-     * @throws SQLException
-     */
+
+
     @Override
     public void add(User user) throws SQLException {
 
@@ -23,14 +21,10 @@ public class UserDaoImplementation implements UserDAO {
         ps.setString(3, user.getUsername());
         ps.setString(4, user.getPassword());
         ps.setString(5, user.getRole().toString());
-        int i = ps.executeUpdate();
-
+        ps.executeUpdate();
      }
 
-    /**
-     * @param id
-     * @throws SQLException
-     */
+
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM " + table + " WHERE id_user =?";
@@ -39,11 +33,7 @@ public class UserDaoImplementation implements UserDAO {
         ps.executeUpdate();
     }
 
-    /**
-     * @param id
-     * @return User
-     * @throws SQLException
-     */
+
     @Override
     public User getUser(int id) throws SQLException {
         String query = "SELECT * FROM " + table + " WHERE id_user =?";
@@ -92,10 +82,6 @@ public class UserDaoImplementation implements UserDAO {
         }
     }
 
-    /**
-     * @return
-     * @throws SQLException
-     */
     @Override
     public ArrayList<User> getAllUsers() throws SQLException {
 
@@ -116,10 +102,6 @@ public class UserDaoImplementation implements UserDAO {
         return ls;
     }
 
-    /**
-     * @param user
-     * @throws SQLException
-     */
     @Override
     public void update(User user) throws SQLException {
         String query = "UPDATE " + table + " SET firstname = ?, lastname = ?, username = ?, password=?, role = ? WHERE id_user = ?";
@@ -130,6 +112,7 @@ public class UserDaoImplementation implements UserDAO {
         ps.setString(3, user.getUsername());
         ps.setString(4, user.getPassword());
         ps.setString(5, user.getRole().toString());
+        ps.setInt(6, user.getId());
         ps.executeUpdate();
     }
 }

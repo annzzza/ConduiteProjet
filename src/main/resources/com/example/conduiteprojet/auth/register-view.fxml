@@ -51,9 +51,9 @@
     <Label fx:id="errorLabel" GridPane.columnSpan="3" GridPane.rowIndex="7"/>
     <HBox fx:id = "root" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0"
           GridPane.columnIndex="1" GridPane.rowIndex="8">
-        <Button fx:id="validateButton" text="Validate" onAction="#onValidateButtonClick"/>
+        <Button fx:id="validateButton" text="Register" onAction="#onValidateButtonClick"/>
         <Label fx:id="welcomeLabel" text="" />
-        <Button fx:id="pursueButton" text="Pursue" onAction="#onPursueButtonClick" visible="false"/>
+        <Button fx:id="pursueButton" text="Log In" onAction="#onPursueButtonClick" visible="true"/>
     </HBox>
 
 </GridPane>

@@ -1,5 +1,6 @@
 package com.example.conduiteprojet.app;
 
+import com.example.conduiteprojet.auth.User;
 import com.example.conduiteprojet.auth.LogInController;
 import com.example.conduiteprojet.auth.User;
 import com.example.conduiteprojet.database.AssistanceDaoImplementation;
@@ -33,7 +34,7 @@ public class MainWindowController {
     public VBox rightVBox;
 
     private AssistanceDaoImplementation a_daoimpl = new AssistanceDaoImplementation();
-    String role = PreferencesManager.getRole();
+    User.Role role = PreferencesManager.getRole();
 
     /**
      * Get the list that suits the user's chosen role at connection
@@ -42,10 +43,10 @@ public class MainWindowController {
      * @throws SQLException
      */
     public List<Assistance> getCorrespondingList() throws SQLException {
-        if (role.equals("BENEVOLE")) {
+        if (role.equals(User.Role.BENEVOLE)) {
             //If User is a Benevole, retrieve list of Requests
             return a_daoimpl.getAssistanceRequests();
-        } else if ( role.equals("VALIDEUR")) {
+        } else if ( role.equals(User.Role.VALIDEUR)) {
             //If User is a Valideur, retrieve list of Pending Requests
             return  a_daoimpl.getAssistanceToValidate();
         } else {
@@ -113,7 +114,7 @@ public class MainWindowController {
 
         LOGGER.info("Initialization of Main Window has started.");
 
-        if (role.equals("BENEVOLE")){
+        if (role.equals(User.Role.BENEVOLE)){
 
             LOGGER.info("Displaying List of Requests");
 
@@ -126,7 +127,7 @@ public class MainWindowController {
                 selfRequestsTab.setContent(new Label("Nothing to see there yet"));
                 tabPane.getTabs().add(selfRequestsTab);
             }
-        } else if (role.equals("PATIENT")) {
+        } else if (role.equals(User.Role.PATIENT)) {
 
             LOGGER.info("Displaying List of Offers");
 
