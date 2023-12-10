@@ -23,42 +23,42 @@ jobs:
     if: "github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[release]')"
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
-    - name: Extract Maven project version
-      id: extract_version
-      run: echo "::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
+      - name: Extract Maven project version
+        id: extract_version
+        run: echo "::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
 
-    - name: Show Maven project version
-      run: echo ${{ steps.extract_version.outputs.version }}
+      - name: Show Maven project version
+        run: echo ${{ steps.extract_version.outputs.version }}
 
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
+        with:
           tag_name: ${{ steps.extract_version.outputs.version }}
           release_name: Release ${{ steps.extract_version.outputs.version }}
           draft: false
           prerelease: false
           body: "Release ${{ steps.extract_version.outputs.version }}"
 
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
+        with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./target/ConduiteProjet-${{steps.project.outputs.version}}-shaded.jar
           asset_name: Release-${{ steps.extract_version.outputs.version }}.jar
@@ -67,18 +67,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-#    if: "github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[release]')"
+    #    if: "github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[release]')"
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
