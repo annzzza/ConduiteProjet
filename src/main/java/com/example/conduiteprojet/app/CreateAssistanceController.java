@@ -1,5 +1,6 @@
 package com.example.conduiteprojet.app;
 
+import com.example.conduiteprojet.auth.User;
 import com.example.conduiteprojet.database.AssistanceDaoImplementation;
 import com.example.conduiteprojet.utils.PreferencesManager;
 import javafx.application.Platform;
@@ -46,10 +47,10 @@ public class CreateAssistanceController{
             String title = titleField.getText();
             Assistance ass = new Assistance();
             ass.setTitle(title);
-            ass.setCreatorId(PreferencesManager.getUserID());
+            ass.setCreatorId(PreferencesManager.getID());
             ass.setDescription(descriptionField.getText());
             ass.setCancelled(false);
-            if (PreferencesManager.getRole().equals("BENEVOLE")) {
+            if (PreferencesManager.getRole().equals(User.Role.BENEVOLE)) {
                 ass.setStatus(Assistance.Status.ACCEPTED);
                 ass.setType(Assistance.Type.OFFER);
             } else {

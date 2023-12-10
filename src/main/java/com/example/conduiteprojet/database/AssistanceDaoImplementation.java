@@ -28,7 +28,7 @@ public class AssistanceDaoImplementation
                 +"VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, assistance.getTitle());
-        ps.setInt(2, PreferencesManager.getUserID());
+        ps.setInt(2, assistance.getCreatorId());
         ps.setString(3, assistance.getDescription());
         ps.setDate(4, assistance.getCreatedAt());
         ps.setDate(5, assistance.getDueDate());
@@ -144,7 +144,7 @@ public class AssistanceDaoImplementation
 
         String query = "SELECT * from " + table + " WHERE creator = ? AND status =? AND type=?";
         PreparedStatement ps = con.prepareStatement(query);
-        ps.setInt(1, PreferencesManager.getUserID());
+        ps.setInt(1, PreferencesManager.getID());
         ps.setString(2, "ACCEPTED");
         ps.setString(3, "REQUEST");
         ResultSet rs = ps.executeQuery();
